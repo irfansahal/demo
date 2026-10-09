@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {  Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/nav/navigation";
+import Footer from "./components/footer/footer";
+import Marquee from "./components/marquee/marqueeText";
+import { Toaster } from "react-hot-toast";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const noteSeriefBangali = Noto_Serif_Bengali({
+  subsets: ["latin", "bengali"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,9 +24,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+       data-theme="light"
+      className={`${noteSeriefBangali.className}  h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col"
+       cz-shortcut-listen="true"
+      >
+        <div className="max-w-7xl mx-auto">
+          <Navbar/>
+          <Marquee/>
+        {children}
+        <Footer/>
+        </div>
+         <Toaster />
+        </body>
     </html>
   );
 }
